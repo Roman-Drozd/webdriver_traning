@@ -267,3 +267,16 @@ def test_new_window(driver):
         driver.switch_to.window(new_window[0])
         driver.close()
         driver.switch_to.window(main_window)
+
+
+def test_category_logs(driver):
+    driver.implicitly_wait(3)
+    driver.get('http://localhost/litecart/admin/?app=catalog&doc=catalog&category_id=0')
+    driver.find_element_by_name('username').send_keys('admin')
+    driver.find_element_by_name('password').send_keys('admin')
+    driver.find_element_by_name('login').click()
+    goods = driver.find_elements_by_css_selector('.dataTable td:nth-child(3) a[href*=product_id]')
+    for good in range(len(goods)):
+        driver.find_elements_by_css_selector('.dataTable td:nth-child(3) a[href*=product_id]')[good].click()
+        assert driver.get_log('browser') == []
+        driver.get('http://localhost/litecart/admin/?app=catalog&doc=catalog&category_id=0')
