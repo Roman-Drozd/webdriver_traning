@@ -11,7 +11,7 @@ from pages.registration_page import RegistrationPage
 class Application:
 
     def __init__(self):
-        self.driver = webdriver.Chrome()
+        # self.driver = webdriver.Chrome()
         self.registration_page = RegistrationPage(self.driver)
         self.admin_panel_login_page = AdminPanelLoginPage(self.driver)
         self.customer_list_page = CustomerListPage(self.driver)
@@ -20,8 +20,8 @@ class Application:
         self.header_menu = HeaderMenu(self.driver)
         self.cart_page = CartPage(self.driver)
 
-    def quit(self):
-        self.driver.quit()
+    # def quit(self):
+    #     self.driver.quit()
 
     def register_new_customer(self, customer):
         self.registration_page.open()

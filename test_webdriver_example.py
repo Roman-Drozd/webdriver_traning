@@ -69,7 +69,6 @@ def test_stickers(driver):
         stickers = product.find_elements_by_css_selector('div[class^=sticker]')
         assert len(stickers) == 1
         assert product.find_element_by_css_selector('div[class^=sticker]').is_displayed()
-        WebDriverWait(driver, 10).until(EC.title_is('webdriver - Пошук Google'))
 
 
 def test_sorted_countries_in_table(driver):

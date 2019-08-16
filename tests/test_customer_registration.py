@@ -1,4 +1,6 @@
 import pytest
+
+from tests.common import BaseTest
 from .data_providers import valid_customers
 
 
@@ -12,3 +14,11 @@ def test_can_register_customer(app, customer):
 
     assert all([i in new_ids for i in old_ids])
     assert len(new_ids) == len(old_ids) + 1
+
+
+class TestClass1(BaseTest):
+    def test_1_1(self, driver):
+        driver.instance.get('http://lessons2.ru')
+
+    def test_1_2(self, driver):
+        driver.instance.get('http://automated-testing.info')
