@@ -1,4 +1,3 @@
-from selenium import webdriver
 from pages.admin_panel_login_page import AdminPanelLoginPage
 from pages.cart_page import CartPage
 from pages.customer_list_page import CustomerListPage
@@ -10,8 +9,8 @@ from pages.registration_page import RegistrationPage
 
 class Application:
 
-    def __init__(self):
-        # self.driver = webdriver.Chrome()
+    def __init__(self, driver):
+        self.driver = driver
         self.registration_page = RegistrationPage(self.driver)
         self.admin_panel_login_page = AdminPanelLoginPage(self.driver)
         self.customer_list_page = CustomerListPage(self.driver)
@@ -19,9 +18,6 @@ class Application:
         self.product_page = ProductPage(self.driver)
         self.header_menu = HeaderMenu(self.driver)
         self.cart_page = CartPage(self.driver)
-
-    # def quit(self):
-    #     self.driver.quit()
 
     def register_new_customer(self, customer):
         self.registration_page.open()
@@ -50,7 +46,7 @@ class Application:
         self.product_page.select_product_size()
         self.product_page.add_to_cart_button.click()
         self.product_page.close_product_alert()
-        self.driver.refresh()
+        self.driver.instance.refresh()
         self.header_menu.is_item_in_cart_increase(items_in_cart_old)
 
     def get_product_number_in_cart(self):

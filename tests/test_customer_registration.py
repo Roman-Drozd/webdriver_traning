@@ -1,19 +1,22 @@
 import pytest
 
+from app.application import Application
 from tests.common import BaseTest
 from .data_providers import valid_customers
 
 
-@pytest.mark.parametrize("customer", valid_customers, ids=[repr(x) for x in valid_customers])
-def test_can_register_customer(app, customer):
-    old_ids = app.get_customer_ids()
+class TestCustomer(BaseTest):
+    @pytest.mark.parametrize("customer", valid_customers, ids=[repr(x) for x in valid_customers])
+    def test_can_register_customer(self, driver, customer):
+        app = Application(driver)
+        old_ids = app.get_customer_ids()
 
-    app.register_new_customer(customer)
+        app.register_new_customer(customer)
 
-    new_ids = app.get_customer_ids()
+        new_ids = app.get_customer_ids()
 
-    assert all([i in new_ids for i in old_ids])
-    assert len(new_ids) == len(old_ids) + 1
+        assert all([i in new_ids for i in old_ids])
+        assert len(new_ids) == len(old_ids) + 1
 
 
 class TestClass1(BaseTest):

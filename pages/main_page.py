@@ -8,9 +8,9 @@ class MainPage:
         self.wait = WebDriverWait(driver, 10)
 
     def open(self):
-        self.driver.get('http://localhost/litecart/en/')
+        self.driver.instance.get('http://localhost/litecart/en/')
         return self
 
     @property
     def products(self):
-        return self.driver.find_elements_by_class_name("product")
+        return self.driver.instance.find_elements_by_class_name("product")
