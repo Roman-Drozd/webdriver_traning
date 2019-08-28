@@ -7,15 +7,15 @@ class CartPage:
 
     def __init__(self, driver):
         self.driver = driver
-        self.wait = WebDriverWait(driver.instance, 10)
+        self.wait = WebDriverWait(driver, 10)
 
     def open(self):
-        self.driver.instance.get('http://localhost/litecart/en/checkout')
+        self.driver.get('http://localhost/litecart/en/checkout')
         return self
 
     @property
     def cart_items(self):
-        return self.driver.instance.find_elements_by_css_selector('td.item')
+        return self.driver.find_elements_by_css_selector('td.item')
 
     def remove_item_from_cart(self):
         self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '[value=Remove]'))).click()
